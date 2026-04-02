@@ -1161,9 +1161,13 @@
       <div class="ach-grid fade">
         <!-- HACKATHON -->
         <div class="ach-card featured">
-          <div class="ach-img-scroll">
-            <img src="Hackthon-project.png" alt="Sentinel Dashboard" />
-            <img src="Hackthon-project-image-02.png" alt="Team at Hackathon" />
+          <div class="ach-carousel">
+            <button class="carousel-btn prev" onclick="this.parentElement.querySelector('.carousel-track').scrollBy({left:-this.parentElement.offsetWidth,behavior:'smooth'})">&lsaquo;</button>
+            <div class="carousel-track">
+              <img src="Hackthon-project.png" alt="Sentinel Dashboard" />
+              <img src="Hackthon-project-image-02.png" alt="Team at Hackathon" />
+            </div>
+            <button class="carousel-btn next" onclick="this.parentElement.querySelector('.carousel-track').scrollBy({left:this.parentElement.offsetWidth,behavior:'smooth'})">&rsaquo;</button>
           </div>
           <div class="ach-body">
             <h3>YUKTA 2026 Hackathon Finalist</h3>
@@ -1254,14 +1258,20 @@
 
         <!-- INTERNSHIP -->
         <div class="ach-card">
-          <div class="ach-img">
-            <img src="INTERNSHIP_image-02.png" alt="Internship Certificate" />
+          <div class="ach-carousel">
+            <button class="carousel-btn prev" onclick="this.parentElement.querySelector('.carousel-track').scrollBy({left:-this.parentElement.offsetWidth,behavior:'smooth'})">&lsaquo;</button>
+            <div class="carousel-track">
+              <img src="INTERNSHIP_image-02.png" alt="Internship Certificate" />
+              <img src="intership-image-02.png" alt="Training Certificate" />
+            </div>
+            <button class="carousel-btn next" onclick="this.parentElement.querySelector('.carousel-track').scrollBy({left:this.parentElement.offsetWidth,behavior:'smooth'})">&rsaquo;</button>
           </div>
           <div class="ach-body">
             <h3>Full Stack Internship &amp; Training</h3>
             <p>
-              Completed a professional internship at <strong>Triple One Solutions</strong>,
-              mastering the creation of scalable full-stack applications and performance optimization.
+              Completed Full Stack Training (Aug–Sep 2025) and Internship (Sep–Oct 2025)
+              at <strong>Triple One Solutions</strong>. Gained hands-on MERN Stack experience,
+              contributed to real projects, and earned outstanding performance recognition.
             </p>
             <div class="ach-footer">
               <span class="ach-date">Oct 2025</span>
