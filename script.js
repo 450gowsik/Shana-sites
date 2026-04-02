@@ -15,6 +15,13 @@ const io = new IntersectionObserver(
 fades.forEach((el) => io.observe(el));
 
 // Stack filter
+document.querySelectorAll(".stab").forEach((button) => {
+  button.addEventListener("click", () => {
+    const category = button.dataset.category;
+    showStack(category, button);
+  });
+});
+
 function showStack(cat, btn) {
   document
     .querySelectorAll(".stab")

@@ -179,21 +179,11 @@
         <div class="label">Tech Stack</div>
         <h2 class="section-title">What I work with</h2>
         <div class="stack-tabs">
-          <button class="stab active" onclick="showStack('all', this)">
-            All
-          </button>
-          <button class="stab" onclick="showStack('frontend', this)">
-            Frontend
-          </button>
-          <button class="stab" onclick="showStack('backend', this)">
-            Backend
-          </button>
-          <button class="stab" onclick="showStack('cloud', this)">
-            AWS Cloud
-          </button>
-          <button class="stab" onclick="showStack('devops', this)">
-            DevOps
-          </button>
+          <button class="stab active" data-category="all">All</button>
+          <button class="stab" data-category="frontend">Frontend</button>
+          <button class="stab" data-category="backend">Backend</button>
+          <button class="stab" data-category="cloud">AWS Cloud</button>
+          <button class="stab" data-category="devops">DevOps</button>
         </div>
 
         <div id="stack-all" class="stack-panel active">
