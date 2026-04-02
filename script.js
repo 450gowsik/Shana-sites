@@ -29,6 +29,11 @@ function showStack(cat, btn) {
 }
 
 // Form (POST to backend)
+const contactForm = document.getElementById("contact-form");
+if (contactForm) {
+  contactForm.addEventListener("submit", submitForm);
+}
+
 async function submitForm(e) {
   e.preventDefault();
   const form = e.target;
