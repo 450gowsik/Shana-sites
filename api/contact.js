@@ -1,4 +1,5 @@
 const { createClient } = require('@supabase/supabase-js');
+const { Resend } = require('resend');
 
 // Initialize Supabase
 const supabaseUrl = process.env.SUPABASE_URL;
@@ -48,6 +49,30 @@ module.exports = async (req, res) => {
       ]);
 
     if (error) throw error;
+
+    // Send Email Notification
+    try {
+      if (process.env.RESEND_API_KEY) {
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        await resend.emails.send({
+          from: 'Portfolio Contact <onboarding@resend.dev>',
+          to: 'gowsikbabubabu@gmail.com',
+          subject: `New Message: ${subject || 'No Subject'}`,
+          html: `
+            <h3>New Portfolio Message</h3>
+            <p><strong>From:</strong> ${name} (${email})</p>
+            <p><strong>Subject:</strong> ${subject || 'N/A'}</p>
+            <p><strong>Message:</strong></p>
+            <p>${message}</p>
+            <hr />
+            <p><small>Sent at: ${new Date().toLocaleString()}</small></p>
+          `
+        });
+      }
+    } catch (emailError) {
+      console.error('Email notification failed:', emailError);
+      // We don't return 500 here because the message was already saved to Supabase
+    }
 
     return res.status(200).json({ ok: true, message: 'Message sent successfully' });
   } catch (err) {
