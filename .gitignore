@@ -4,3 +4,4 @@ messages.json
 .DS_Store
 dist/
 .vscode/
+*.tar

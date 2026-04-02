@@ -25,3 +25,9 @@ jobs:
 
       - name: Test Endpoint
         run: curl http://localhost:3000
+
+      - name: Build Docker Image
+        run: docker build -t shana-site .
+
+      - name: Run Docker Container
+        run: docker run -d -p 3000:3000 shana-site
