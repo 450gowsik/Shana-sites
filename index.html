@@ -542,42 +542,59 @@
         </div>
 
         <!-- S3 CloudFront -->
-        <div class="proj-card">
-          <div class="proj-num">05</div>
-          <div class="proj-name">Static Site Hosting — S3 + CloudFront</div>
-          <div class="proj-desc">
-            Globally distributed CDN-based static website using Amazon S3
-            (versioning enabled) and CloudFront CDN for low-latency delivery,
-            with IAM access policies and HTTPS enforcement.
-          </div>
-          <div class="proj-tag-row">
-            <span class="ptag cloud">S3</span
-            ><span class="ptag cloud">CloudFront</span
-            ><span class="ptag cloud">IAM</span
-            ><span class="ptag cloud">HTTPS</span>
-          </div>
-          <div
-            style="
-              margin-top: auto;
-              display: flex;
-              gap: 12px;
-              align-items: center;
-            "
-          >
-            <a
-              class="proj-link"
-              href="https://github.com/450gowsik"
-              target="_blank"
-              rel="noopener"
-              >Live ↗</a
+        <div class="proj-card has-carousel">
+          <div class="proj-card-content">
+            <div class="proj-num">05</div>
+            <div class="proj-name">Static Site Hosting — S3 + CloudFront</div>
+            <div class="proj-desc">
+              Globally distributed CDN-based static website using Amazon S3
+              (versioning enabled) and CloudFront CDN for low-latency delivery,
+              with IAM access policies and HTTPS enforcement.
+            </div>
+            <div class="proj-tag-row">
+              <span class="ptag cloud">S3</span
+              ><span class="ptag cloud">CloudFront</span
+              ><span class="ptag cloud">IAM</span
+              ><span class="ptag cloud">HTTPS</span>
+            </div>
+            <div
+              style="
+                margin-top: auto;
+                display: flex;
+                gap: 12px;
+                align-items: center;
+              "
             >
-            <a
-              class="proj-link"
-              href="https://github.com/450gowsik"
-              target="_blank"
-              rel="noopener"
-              >GitHub ↗</a
-            >
+              <a
+                class="proj-link"
+                href="https://github.com/450gowsik"
+                target="_blank"
+                rel="noopener"
+                >Live ↗</a
+              >
+              <a
+                class="proj-link"
+                href="https://github.com/450gowsik"
+                target="_blank"
+                rel="noopener"
+                >GitHub ↗</a
+              >
+            </div>
+          </div>
+          <div class="proj-carousel" id="s3-cloudfront-carousel">
+            <div class="proj-carousel-counter"><span class="curr">1</span> / 3</div>
+            <div class="proj-carousel-track">
+              <img src="aws-s3-buckets-1.png" alt="AWS S3 Buckets — Global list of general purpose buckets in US East and Asia Pacific regions" />
+              <img src="aws-s3-buckets-2.png" alt="AWS S3 Buckets — Detailed list showing project-specific buckets including jarvis and italian-restaurant" />
+              <img src="aws-s3-bucket-properties.png" alt="AWS S3 Properties — Bucket versioning and ARN details for jarvis-zappa-deploy" />
+            </div>
+            <button class="proj-carousel-nav prev" onclick="slideProj(this, -1)">‹</button>
+            <button class="proj-carousel-nav next" onclick="slideProj(this, 1)">›</button>
+            <div class="proj-carousel-dots">
+              <span class="proj-carousel-dot active"></span>
+              <span class="proj-carousel-dot"></span>
+              <span class="proj-carousel-dot"></span>
+            </div>
           </div>
         </div>
 
