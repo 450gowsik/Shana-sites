@@ -482,43 +482,62 @@
         </div>
 
         <!-- AWS HA -->
-        <div class="proj-card">
-          <div class="proj-num">04</div>
-          <div class="proj-name">Highly Available AWS Architecture</div>
-          <div class="proj-desc">
-            Architected scalable EC2 infrastructure with Application Load
-            Balancer, Auto Scaling Groups across isolated VPC subnets, and S3
-            object storage integration.
-          </div>
-          <div class="proj-tag-row">
-            <span class="ptag cloud">AWS EC2</span
-            ><span class="ptag cloud">ALB</span
-            ><span class="ptag cloud">Auto Scaling</span
-            ><span class="ptag cloud">VPC</span
-            ><span class="ptag cloud">S3</span>
-          </div>
-          <div
-            style="
-              margin-top: auto;
-              display: flex;
-              gap: 12px;
-              align-items: center;
-            "
-          >
-            <a
-              class="proj-link"
-              href="https://github.com/450gowsik"
-              target="_blank"
-              rel="noopener"
-              >Live ↗</a
+        <div class="proj-card has-carousel">
+          <div class="proj-card-content">
+            <div class="proj-num">04</div>
+            <div class="proj-name">Highly Available AWS Architecture</div>
+            <div class="proj-desc">
+              Architected scalable EC2 infrastructure with Application Load
+              Balancer, Auto Scaling Groups across isolated VPC subnets, and S3
+              object storage integration.
+            </div>
+            <div class="proj-tag-row">
+              <span class="ptag cloud">AWS EC2</span
+              ><span class="ptag cloud">ALB</span
+              ><span class="ptag cloud">Auto Scaling</span
+              ><span class="ptag cloud">VPC</span
+              ><span class="ptag cloud">S3</span>
+            </div>
+            <div
+              style="
+                margin-top: auto;
+                display: flex;
+                gap: 12px;
+                align-items: center;
+              "
             >
-            <a
-              class="proj-link"
-              href="https://github.com/450gowsik"
-              target="_blank"
-              rel="noopener"
-              >GitHub ↗</a
-            >
+              <a
+                class="proj-link"
+                href="https://github.com/450gowsik"
+                target="_blank"
+                rel="noopener"
+                >Live ↗</a
+              >
+              <a
+                class="proj-link"
+                href="https://github.com/450gowsik"
+                target="_blank"
+                rel="noopener"
+                >GitHub ↗</a
+              >
+            </div>
+          </div>
+          <div class="proj-carousel" id="aws-ha-carousel">
+            <div class="proj-carousel-counter"><span class="curr">1</span> / 4</div>
+            <div class="proj-carousel-track">
+              <img src="aws-ec2-instances.png" alt="AWS EC2 Instances — Running t3.small and t3.micro instances with security checks passed" />
+              <img src="aws-security-groups.png" alt="AWS Security Groups — Configured security groups for ELB, RDS, EFS and instances" />
+              <img src="aws-elastic-ips.png" alt="AWS Elastic IPs — Allocated public IPv4 addresses for infrastructure access" />
+              <img src="aws-vpc-dashboard.png" alt="AWS VPC Dashboard — project-vpc with custom CIDR and networking configuration" />
+            </div>
+            <button class="proj-carousel-nav prev" onclick="slideProj(this, -1)">‹</button>
+            <button class="proj-carousel-nav next" onclick="slideProj(this, 1)">›</button>
+            <div class="proj-carousel-dots">
+              <span class="proj-carousel-dot active"></span>
+              <span class="proj-carousel-dot"></span>
+              <span class="proj-carousel-dot"></span>
+              <span class="proj-carousel-dot"></span>
+            </div>
           </div>
         </div>
 
