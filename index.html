@@ -563,44 +563,63 @@
         </div>
 
         <!-- Serverless API -->
-        <div class="proj-card">
-          <div class="proj-num">06</div>
-          <div class="proj-name">
-            Serverless REST API — Lambda + API Gateway
-          </div>
-          <div class="proj-desc">
-            Event-driven serverless backend with Python-based Lambda functions
-            for CRUD operations, integrated with API Gateway and DynamoDB for
-            scalable data storage.
-          </div>
-          <div class="proj-tag-row">
-            <span class="ptag cloud">Lambda</span
-            ><span class="ptag cloud">API Gateway</span
-            ><span class="ptag cloud">DynamoDB</span
-            ><span class="ptag cloud">Python</span>
-          </div>
-          <div
-            style="
-              margin-top: auto;
-              display: flex;
-              gap: 12px;
-              align-items: center;
-            "
-          >
-            <a
-              class="proj-link"
-              href="https://github.com/450gowsik"
-              target="_blank"
-              rel="noopener"
-              >Live ↗</a
+        <div class="proj-card has-carousel">
+          <div class="proj-card-content">
+            <div class="proj-num">06</div>
+            <div class="proj-name">
+              Serverless REST API — Lambda + API Gateway
+            </div>
+            <div class="proj-desc">
+              Event-driven serverless backend with Python-based Lambda functions
+              for CRUD operations, integrated with API Gateway and DynamoDB for
+              scalable data storage.
+            </div>
+            <div class="proj-tag-row">
+              <span class="ptag cloud">Lambda</span
+              ><span class="ptag cloud">API Gateway</span
+              ><span class="ptag cloud">DynamoDB</span
+              ><span class="ptag cloud">Python</span>
+            </div>
+            <div
+              style="
+                margin-top: auto;
+                display: flex;
+                gap: 12px;
+                align-items: center;
+              "
             >
-            <a
-              class="proj-link"
-              href="https://github.com/450gowsik"
-              target="_blank"
-              rel="noopener"
-              >GitHub ↗</a
-            >
+              <a
+                class="proj-link"
+                href="https://github.com/450gowsik"
+                target="_blank"
+                rel="noopener"
+                >Live ↗</a
+              >
+              <a
+                class="proj-link"
+                href="https://github.com/450gowsik"
+                target="_blank"
+                rel="noopener"
+                >GitHub ↗</a
+              >
+            </div>
+          </div>
+          <div class="proj-carousel" id="serverless-carousel">
+            <div class="proj-carousel-counter"><span class="curr">1</span> / 4</div>
+            <div class="proj-carousel-track">
+              <img src="serverless-dynamodb-tables.png" alt="DynamoDB Tables — jarvis_users table with partition key, sort key, capacity and item details" />
+              <img src="serverless-dynamodb-items.png" alt="DynamoDB Items — jarvis_chats table showing 14 chat records with user emails and timestamps" />
+              <img src="serverless-api-gateway.png" alt="API Gateway Resources — daycraft API with GET and POST methods integrated with Lambda" />
+              <img src="serverless-gateway-responses.png" alt="API Gateway Responses — complete gateway response configuration with status codes" />
+            </div>
+            <button class="proj-carousel-nav prev" onclick="slideProj(this, -1)">‹</button>
+            <button class="proj-carousel-nav next" onclick="slideProj(this, 1)">›</button>
+            <div class="proj-carousel-dots">
+              <span class="proj-carousel-dot active"></span>
+              <span class="proj-carousel-dot"></span>
+              <span class="proj-carousel-dot"></span>
+              <span class="proj-carousel-dot"></span>
+            </div>
           </div>
         </div>
 

@@ -65,3 +65,93 @@ async function submitForm(e) {
     console.error(err);
   }
 }
+
+// ─── Project Carousel (LinkedIn-style) ───
+function slideProj(btn, dir) {
+  const carousel = btn.closest(".proj-carousel");
+  const track = carousel.querySelector(".proj-carousel-track");
+  const images = track.querySelectorAll("img");
+  const w = track.clientWidth;
+  const currentIndex = Math.round(track.scrollLeft / w);
+  let next = currentIndex + dir;
+  if (next < 0) next = images.length - 1;
+  if (next >= images.length) next = 0;
+  track.scrollTo({ left: next * w, behavior: "smooth" });
+  updateCarouselUI(carousel, next);
+}
+
+function updateCarouselUI(carousel, index) {
+  // Update dots
+  const dots = carousel.querySelectorAll(".proj-carousel-dot");
+  dots.forEach((d, i) => {
+    d.classList.toggle("active", i === index);
+  });
+  // Update counter
+  const counter = carousel.querySelector(".proj-carousel-counter .curr");
+  if (counter) counter.textContent = index + 1;
+}
+
+// Dot click navigation
+document.querySelectorAll(".proj-carousel-dot").forEach((dot, i) => {
+  dot.addEventListener("click", () => {
+    const carousel = dot.closest(".proj-carousel");
+    const track = carousel.querySelector(".proj-carousel-track");
+    const w = track.clientWidth;
+    track.scrollTo({ left: i * w, behavior: "smooth" });
+    updateCarouselUI(carousel, i);
+  });
+});
+
+// Scroll-based dot tracking
+document.querySelectorAll(".proj-carousel-track").forEach((track) => {
+  track.addEventListener("scroll", () => {
+    const carousel = track.closest(".proj-carousel");
+    const w = track.clientWidth;
+    const index = Math.round(track.scrollLeft / w);
+    updateCarouselUI(carousel, index);
+  });
+});
+
+// Full-screen image overlay
+(function () {
+  // Create overlay element
+  const overlay = document.createElement("div");
+  overlay.className = "proj-img-overlay";
+  overlay.innerHTML = `
+    <button class="close-btn">✕</button>
+    <img src="" alt="Full view" />
+  `;
+  document.body.appendChild(overlay);
+
+  const overlayImg = overlay.querySelector("img");
+  const closeBtn = overlay.querySelector(".close-btn");
+
+  // Click on carousel images to zoom
+  document.querySelectorAll(".proj-carousel-track img").forEach((img) => {
+    img.addEventListener("click", () => {
+      overlayImg.src = img.src;
+      overlayImg.alt = img.alt;
+      overlay.classList.add("active");
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  // Close overlay
+  function closeOverlay() {
+    overlay.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  closeBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    closeOverlay();
+  });
+
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeOverlay();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeOverlay();
+  });
+})();
