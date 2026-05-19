@@ -1,0 +1,115 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate site
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check api/contact.js
+          node --check script.js
+
+  migrate:
+    name: Apply Supabase migrations
+    runs-on: ubuntu-latest
+    needs: validate
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+
+      - name: Run database migration
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          if [ -z "$SUPABASE_DB_URL" ]; then
+            echo "::warning::SUPABASE_DB_URL is not set. Skipping Supabase migrations."
+            exit 0
+          fi
+
+          psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -f supabase/migrations/20260519000000_create_messages.sql
+
+  deploy:
+    name: Deploy to Vercel
+    runs-on: ubuntu-latest
+    needs:
+      - validate
+      - migrate
+
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Deploy production build
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: |
+          if [ -z "$VERCEL_TOKEN" ] || [ -z "$VERCEL_ORG_ID" ] || [ -z "$VERCEL_PROJECT_ID" ]; then
+            echo "::warning::Vercel secrets are not set. Skipping Vercel deployment."
+            exit 0
+          fi
+
+          npx vercel@latest pull --yes --environment=production --token="$VERCEL_TOKEN"
+
+          sync_vercel_env() {
+            local name="$1"
+            local value="$2"
+
+            if [ -z "$value" ]; then
+              echo "::warning::$name is empty. Skipping Vercel env sync for $name."
+              return
+            fi
+
+            npx vercel@latest env rm "$name" production --yes --token="$VERCEL_TOKEN" >/dev/null 2>&1 || true
+            printf "%s" "$value" | npx vercel@latest env add "$name" production --token="$VERCEL_TOKEN"
+          }
+
+          sync_vercel_env "SUPABASE_URL" "$SUPABASE_URL"
+          sync_vercel_env "SUPABASE_PUBLISHABLE_KEY" "$SUPABASE_PUBLISHABLE_KEY"
+          sync_vercel_env "SUPABASE_ANON_KEY" "$SUPABASE_PUBLISHABLE_KEY"
+          sync_vercel_env "RESEND_API_KEY" "$RESEND_API_KEY"
+
+          npx vercel@latest pull --yes --environment=production --token="$VERCEL_TOKEN"
+          npx vercel@latest build --prod --token="$VERCEL_TOKEN"
+          npx vercel@latest deploy --prebuilt --prod --token="$VERCEL_TOKEN"

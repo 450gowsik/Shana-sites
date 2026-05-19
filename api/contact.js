@@ -1,15 +1,17 @@
 const { createClient } = require('@supabase/supabase-js');
 const { Resend } = require('resend');
 
-// Initialize Supabase
 const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_ANON_KEY;
+const supabaseKey =
+  process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_PUBLISHABLE_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
-  console.error("CRITICAL: SUPABASE_URL or SUPABASE_ANON_KEY is missing from environment variables.");
+  console.error("CRITICAL: SUPABASE_URL and a Supabase publishable/anon key are required.");
 }
 
-const supabase = createClient(supabaseUrl || '', supabaseKey || '');
+const supabase = supabaseUrl && supabaseKey
+  ? createClient(supabaseUrl, supabaseKey)
+  : null;
 
 module.exports = async (req, res) => {
   // CORS Headers
@@ -33,6 +35,10 @@ module.exports = async (req, res) => {
   const { name, email, subject, message } = req.body;
   if (!name || !email || !message) {
     return res.status(400).json({ error: 'Missing required fields' });
+  }
+
+  if (!supabase) {
+    return res.status(500).json({ error: 'Contact service is not configured.' });
   }
 
   try {
