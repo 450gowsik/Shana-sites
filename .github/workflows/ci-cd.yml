@@ -84,6 +84,7 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          CONTACT_EMAIL_TO: ${{ secrets.CONTACT_EMAIL_TO }}
         run: |
           if [ -z "$VERCEL_TOKEN" ] || [ -z "$VERCEL_ORG_ID" ] || [ -z "$VERCEL_PROJECT_ID" ]; then
             echo "::warning::Vercel secrets are not set. Skipping Vercel deployment."
@@ -109,6 +110,7 @@ jobs:
           sync_vercel_env "SUPABASE_PUBLISHABLE_KEY" "$SUPABASE_PUBLISHABLE_KEY"
           sync_vercel_env "SUPABASE_ANON_KEY" "$SUPABASE_PUBLISHABLE_KEY"
           sync_vercel_env "RESEND_API_KEY" "$RESEND_API_KEY"
+          sync_vercel_env "CONTACT_EMAIL_TO" "$CONTACT_EMAIL_TO"
 
           npx vercel@latest pull --yes --environment=production --token="$VERCEL_TOKEN"
           npx vercel@latest build --prod --token="$VERCEL_TOKEN"
