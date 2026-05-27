@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" role="img" aria-labelledby="title desc">
+  <title id="title">YUKTA 2026 Hackathon Certificate</title>
+  <desc id="desc">Certificate of Participation for Gowsik P in the YUKTA 2K26 Hackathon Track 2.</desc>
+  <rect width="900" height="620" fill="#fbf5e6"/>
+  <rect x="16" y="16" width="868" height="588" fill="none" stroke="#314268" stroke-width="16"/>
+  <path d="M32 590h210" stroke="#c43d3c" stroke-width="8"/>
+  <path d="M32 590v-135" stroke="#c43d3c" stroke-width="8"/>
+  <path d="M872 30h-210" stroke="#c43d3c" stroke-width="8"/>
+  <path d="M872 30v135" stroke="#c43d3c" stroke-width="8"/>
+
+  <g transform="translate(58 42)">
+    <path d="M44 0 88 24 44 50 0 24Z" fill="#334a75"/>
+    <path d="M44 9 70 24 44 40 18 24Z" fill="#f7f0df"/>
+    <path d="M44 15 61 24 44 34 27 24Z" fill="#c43d3c"/>
+    <text x="44" y="29" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#334a75">PSG</text>
+    <text x="44" y="64" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#334a75">iTech</text>
+  </g>
+
+  <text x="450" y="66" text-anchor="middle" font-family="Arial, sans-serif" font-size="31" font-weight="800" fill="#314268">
+    PSG INSTITUTE OF TECHNOLOGY AND
+  </text>
+  <text x="450" y="104" text-anchor="middle" font-family="Arial, sans-serif" font-size="31" font-weight="800" fill="#314268">
+    APPLIED RESEARCH
+  </text>
+  <text x="450" y="134" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#b33c40">
+    (An Autonomous Institution)
+  </text>
+  <text x="450" y="158" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#7a6e63">
+    Neelambur, Coimbatore - 641062
+  </text>
+
+  <g transform="translate(748 40)">
+    <text x="34" y="45" text-anchor="middle" font-family="Georgia, serif" font-size="54" font-weight="700" fill="#314268">100</text>
+    <circle cx="92" cy="31" r="30" fill="none" stroke="#b33c40" stroke-width="3"/>
+    <text x="92" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#314268">PSG</text>
+  </g>
+
+  <text x="450" y="224" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="48" font-weight="900" fill="#b33c40" letter-spacing="6">
+    YUKTA
+  </text>
+  <text x="450" y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="800" fill="#314268">
+    2K26
+  </text>
+  <text x="450" y="303" text-anchor="middle" font-family="Brush Script MT, Segoe Script, cursive" font-size="46" fill="#2b71bd">
+    Certificate of Participation
+  </text>
+
+  <text x="64" y="366" font-family="Arial, sans-serif" font-size="26" fill="#222">This is to certify that</text>
+  <line x1="350" y1="365" x2="846" y2="365" stroke="#222" stroke-width="2" stroke-dasharray="3 5"/>
+  <text x="610" y="355" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="800" fill="#111">Gowsik P</text>
+
+  <text x="64" y="408" font-family="Arial, sans-serif" font-size="26" fill="#222">has participated in the</text>
+  <text x="485" y="408" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="800" fill="#111">Hackathon</text>
+  <text x="635" y="408" font-family="Arial, sans-serif" font-size="26" fill="#222">in the track</text>
+
+  <line x1="64" y1="438" x2="628" y2="438" stroke="#222" stroke-width="2" stroke-dasharray="3 5"/>
+  <text x="350" y="431" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#111">Track 2</text>
+  <text x="630" y="438" font-family="Arial, sans-serif" font-size="26" fill="#222">organised by PSG</text>
+
+  <text x="64" y="481" font-family="Arial, sans-serif" font-size="26" fill="#222">
+    Institute of Technology and Applied Research
+  </text>
+
+  <g font-family="Arial, sans-serif" fill="#333">
+    <text x="188" y="540" text-anchor="middle" font-family="Brush Script MT, Segoe Script, cursive" font-size="25" fill="#333">R.S. Sankarasubramanian</text>
+    <text x="188" y="570" text-anchor="middle" font-size="14" font-weight="700">Dr.R.S.Sankarasubramanian</text>
+    <text x="188" y="590" text-anchor="middle" font-size="14">Faculty Advisor (Student Affairs)</text>
+
+    <text x="672" y="540" text-anchor="middle" font-family="Brush Script MT, Segoe Script, cursive" font-size="31" fill="#20a477">N. Saravanakumar</text>
+    <text x="672" y="570" text-anchor="middle" font-size="14" font-weight="700">Dr. N.Saravanakumar</text>
+    <text x="672" y="590" text-anchor="middle" font-size="14">Principal</text>
+  </g>
+</svg>
