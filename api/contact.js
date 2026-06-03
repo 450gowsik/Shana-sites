@@ -1,17 +1,28 @@
-const { createClient } = require('@supabase/supabase-js');
+const { MongoClient } = require('mongodb');
 const { Resend } = require('resend');
 
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey =
-  process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_PUBLISHABLE_KEY;
+const mongodbUri = process.env.MONGODB_URI;
+const mongodbDbName = process.env.MONGODB_DB || 'gowsik_portfolio';
+const mongodbCollectionName = process.env.MONGODB_COLLECTION || 'messages';
 
-if (!supabaseUrl || !supabaseKey) {
-  console.error('CRITICAL: SUPABASE_URL and a Supabase publishable/anon key are required.');
+if (!mongodbUri) {
+  console.error('CRITICAL: MONGODB_URI is required for the contact form.');
 }
 
-const supabase = supabaseUrl && supabaseKey
-  ? createClient(supabaseUrl, supabaseKey)
-  : null;
+let cachedMongoClient = null;
+
+async function getMessagesCollection() {
+  if (!mongodbUri) {
+    throw new Error('MongoDB is not configured.');
+  }
+
+  if (!cachedMongoClient) {
+    cachedMongoClient = new MongoClient(mongodbUri);
+    await cachedMongoClient.connect();
+  }
+
+  return cachedMongoClient.db(mongodbDbName).collection(mongodbCollectionName);
+}
 
 function escapeHtml(value = '') {
   return String(value)
@@ -188,25 +199,18 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
-  if (!supabase) {
-    return res.status(500).json({ error: 'Contact service is not configured.' });
-  }
-
   try {
     const receivedAt = new Date();
-    const { error } = await supabase
-      .from('messages')
-      .insert([
-        {
-          name,
-          email,
-          subject,
-          message,
-          received_at: receivedAt.toISOString(),
-        },
-      ]);
-
-    if (error) throw error;
+    const messages = await getMessagesCollection();
+    await messages.insertOne({
+      name,
+      email,
+      subject,
+      message,
+      receivedAt,
+      source: 'portfolio-contact-form',
+      createdAt: receivedAt,
+    });
 
     try {
       if (process.env.RESEND_API_KEY) {
@@ -234,7 +238,7 @@ module.exports = async (req, res) => {
 
     return res.status(200).json({ ok: true, message: 'Message sent successfully' });
   } catch (err) {
-    console.error('Failed to save to Supabase:', err);
+    console.error('Failed to save contact message:', err);
     return res.status(500).json({ error: 'Could not send message.' });
   }
 };

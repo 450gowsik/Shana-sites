@@ -29,37 +29,10 @@ jobs:
           node --check api/contact.js
           node --check script.js
 
-  migrate:
-    name: Apply Supabase migrations
-    runs-on: ubuntu-latest
-    needs: validate
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install PostgreSQL client
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y postgresql-client
-
-      - name: Run database migration
-        env:
-          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
-        run: |
-          if [ -z "$SUPABASE_DB_URL" ]; then
-            echo "::warning::SUPABASE_DB_URL is not set. Skipping Supabase migrations."
-            exit 0
-          fi
-
-          psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -f supabase/migrations/20260519000000_create_messages.sql
-
   deploy:
     name: Deploy to Vercel
     runs-on: ubuntu-latest
-    needs:
-      - validate
-      - migrate
+    needs: validate
 
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
@@ -81,8 +54,9 @@ jobs:
       - name: Deploy production build
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          MONGODB_DB: ${{ secrets.MONGODB_DB }}
+          MONGODB_COLLECTION: ${{ secrets.MONGODB_COLLECTION }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           CONTACT_EMAIL_TO: ${{ secrets.CONTACT_EMAIL_TO }}
         run: |
@@ -106,9 +80,9 @@ jobs:
             printf "%s" "$value" | npx vercel@latest env add "$name" production --token="$VERCEL_TOKEN"
           }
 
-          sync_vercel_env "SUPABASE_URL" "$SUPABASE_URL"
-          sync_vercel_env "SUPABASE_PUBLISHABLE_KEY" "$SUPABASE_PUBLISHABLE_KEY"
-          sync_vercel_env "SUPABASE_ANON_KEY" "$SUPABASE_PUBLISHABLE_KEY"
+          sync_vercel_env "MONGODB_URI" "$MONGODB_URI"
+          sync_vercel_env "MONGODB_DB" "$MONGODB_DB"
+          sync_vercel_env "MONGODB_COLLECTION" "$MONGODB_COLLECTION"
           sync_vercel_env "RESEND_API_KEY" "$RESEND_API_KEY"
           sync_vercel_env "CONTACT_EMAIL_TO" "$CONTACT_EMAIL_TO"
 
