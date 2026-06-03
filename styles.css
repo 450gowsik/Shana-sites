@@ -608,6 +608,11 @@ section {
 .freelance-section {
   padding-top: 56px;
 }
+.freelance-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
 .freelance-card {
   display: grid;
   grid-template-columns: auto 1fr auto;
