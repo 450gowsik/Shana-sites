@@ -604,6 +604,56 @@ section {
   margin-top: 2px;
 }
 
+/* FREELANCE */
+.freelance-section {
+  padding-top: 56px;
+}
+.freelance-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 24px;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  background: var(--white);
+}
+.freelance-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--blue-light);
+  color: var(--blue);
+  font-size: 24px;
+}
+.freelance-body .eyebrow {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+.freelance-body h3 {
+  font-size: 22px;
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+.freelance-body p {
+  max-width: 640px;
+  color: var(--gray);
+  font-size: 14px;
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+.freelance-link {
+  justify-self: end;
+  white-space: nowrap;
+}
+
 /* CONTACT */
 .contact-wrap {
   display: grid;
@@ -757,6 +807,13 @@ footer {
   .contact-wrap {
     grid-template-columns: 1fr;
     gap: 36px;
+  }
+  .freelance-card {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .freelance-link {
+    justify-self: start;
   }
   .stack-panel.active {
     grid-template-columns: repeat(2, 1fr);
