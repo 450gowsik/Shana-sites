@@ -57,11 +57,18 @@ async function submitForm(e) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, subject, message }),
     });
-    if (!res.ok) throw new Error("Network response was not ok");
+    if (!res.ok) {
+      let errorMessage = "Sorry - could not send message right now.";
+      try {
+        const data = await res.json();
+        if (data?.error) errorMessage = data.error;
+      } catch (_) {}
+      throw new Error(errorMessage);
+    }
     form.reset();
     document.getElementById("ok").style.display = "block";
   } catch (err) {
-    alert("Sorry — could not send message right now.");
+    alert(err.message || "Sorry - could not send message right now.");
     console.error(err);
   }
 }

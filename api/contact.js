@@ -17,7 +17,9 @@ async function getMessagesCollection() {
   }
 
   if (!cachedMongoClient) {
-    cachedMongoClient = new MongoClient(mongodbUri);
+    cachedMongoClient = new MongoClient(mongodbUri, {
+      serverSelectionTimeoutMS: 8000,
+    });
     await cachedMongoClient.connect();
   }
 
@@ -239,6 +241,20 @@ module.exports = async (req, res) => {
     return res.status(200).json({ ok: true, message: 'Message sent successfully' });
   } catch (err) {
     console.error('Failed to save contact message:', err);
-    return res.status(500).json({ error: 'Could not send message.' });
+    const errorMessage = String(err?.message || '');
+    const setupIssue =
+      !mongodbUri ||
+      errorMessage.includes('bad auth') ||
+      errorMessage.includes('Authentication failed') ||
+      errorMessage.includes('querySrv') ||
+      errorMessage.includes('ENOTFOUND') ||
+      errorMessage.includes('Server selection timed out') ||
+      errorMessage.includes('MongoDB is not configured');
+
+    return res.status(500).json({
+      error: setupIssue
+        ? 'Contact database is not configured correctly.'
+        : 'Could not send message.',
+    });
   }
 };
